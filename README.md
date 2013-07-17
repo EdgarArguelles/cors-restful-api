@@ -5,7 +5,18 @@ AngularJS + NodeJS + CORS + RESTful + PassportJS + FacebookAuth + LocalAuth
 
 ![](http://i43.tinypic.com/2u948l0.jpg)
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/01a001bf787c1578cc0003019fe604f2 "githalytics.com")](http://githalytics.com/pablodenadai/Corsnection)
+Installation
+------------
+
+Work in progress.
+
+Setup
+-----
+
+Work in progress.
+
+License
+-------
 
 ```
 The MIT License (MIT)
@@ -30,3 +41,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/01a001bf787c1578cc0003019fe604f2 "githalytics.com")](http://githalytics.com/pablodenadai/Corsnection)

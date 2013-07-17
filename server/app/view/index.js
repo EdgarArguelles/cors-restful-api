@@ -13,6 +13,6 @@ exports = module.exports = function(app) {
 	app.get('/api/auth/signup/facebook/callback', require('./SignUpView').facebookSignUp);
 
 	// Methods
-	app.get('/sapi/user', userView.get);
+	app.get('/api/user', userView.get);
 
 };

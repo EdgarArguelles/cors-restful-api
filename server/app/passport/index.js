@@ -1,15 +1,16 @@
 exports = module.exports = function(app, passport) {
 	var LocalStrategy = require('passport-local').Strategy,
-		FacebookStrategy = require('passport-facebook').Strategy;
+		FacebookStrategy = require('passport-facebook').Strategy,
+		User = app.db.models.User;
 	
 	// Local
 	passport.use(new LocalStrategy(function(username, password, done) {
-		app.db.base.models.User.findOne({ username: username }, function(err, user) {
+		User.findOne({ username: username }, function(err, user) {
 			if (err) return done(err);
 			if (!user) return done(null, false, { message: 'Unknown user' });
 			
 			// Validate password
-			var encryptedPassword = app.db.base.models.User.encryptPassword(password);
+			var encryptedPassword = User.encryptPassword(password);
 			if (user.password != encryptedPassword) {
 				return done(null, false, { message: 'Invalid password' });
 			}
@@ -42,7 +43,7 @@ exports = module.exports = function(app, passport) {
 	
 	// Deserialize
 	passport.deserializeUser(function(id, done) {
-		app.db.base.models.User.findOne({ _id: id }).exec(function(err, user) {
+		User.findOne({ _id: id }).exec(function(err, user) {
 			done(err, user);
 		});
 	});

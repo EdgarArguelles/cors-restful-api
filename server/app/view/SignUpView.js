@@ -1,6 +1,6 @@
 exports.init = function (req, res) {
 
-	var User = req.app.db.base.models.User,
+	var User = req.app.db.models.User,
 		passport = req._passport.instance;
 
 	var username = req.body.username,
@@ -25,14 +25,7 @@ exports.init = function (req, res) {
 	var duplicateUserCheck = function() {
 		User.findOne({ username: username }, function (err, doc) {
 			if (err) return res.send(500, err);
-			
-			if (doc) {
-				if (doc.username === username) {
-					return res.send(400, 'Username already taken.');
-				} else {
-					return res.send(400, 'Email already taken.');
-				}
-			}
+			if (doc) return res.send(400, 'Username already taken.');
 
 			createUser();
 		});
@@ -41,7 +34,7 @@ exports.init = function (req, res) {
 	var createUser = function() {
 		User.create({
 			username: username,
-			password: req.app.db.base.models.User.encryptPassword(password),
+			password: User.encryptPassword(password),
 			name: name,
 		}, function(err, doc) {
 			if (err) return res.send(500, err);
@@ -59,10 +52,8 @@ exports.init = function (req, res) {
 			} else {
 				req.login(user, function(err) {
 					if (err) return res.send(500, err);
-			
-					req.session.userId = user._id;
-					user.password = undefined;
-					user.email = undefined;
+				
+					delete user.password;
 					res.send(200, { user: user });
 				});
 			}
@@ -72,24 +63,80 @@ exports.init = function (req, res) {
 	validate();
 };
 
+
+
+
+
+
+
+
+var signUpSocial = function (req, res, username, profile) {
+
+	var User = req.app.db.models.User,
+		passport = req._passport.instance;
+
+	var validate = function() {
+		if (!username) {
+			return res.send(400, 'Username required');
+		}
+		else if (!/^[a-zA-Z0-9\-\_]+$/.test(username)) {
+			return res.send(400, 'Username only use letters, numbers, \'-\', \'_\'');
+		}
+
+		duplicateUserCheck();
+	};
+	
+	var duplicateUserCheck = function() {
+		User.findOne({ username: username }, function (err, doc) {
+			if (err) return res.send(500, err);
+			if (doc) return res.send(400, 'Username already taken.');
+
+			createUser();
+		});
+	};
+	
+	var createUser = function() {
+		User.create({
+			username: username,
+			profile: profile,
+		}, function(err, doc) {
+			if (err) return res.send(500, err);
+			
+			signIn(doc);
+		});
+	};
+	
+	var signIn = function(user) {
+		req.login(user, function(err) {
+			if (err) return res.send(500, err);
+			res.send(200, { user: user });
+		});
+	};
+	
+	validate();
+};
+
+
+
+
+
+
 exports.facebookSignUp = function(req, res, next) {
 	var User = req.app.db.models.User,
 		passport = req._passport.instance;
 
-	var p = new User({ name: 'Test', password: 123, username: 'test' });
-	p.save();
-	
 	passport.authenticate('facebook', { callbackURL: 'http://localhost:9000/facebook' }, function(err, user, info) {
 		if (!info || !info.profile) return res.send(400, 'Profile not available.');
 
-		User.findOne({ 'facebook.id': info.profile.id }, function(err, user) {
-			if (err) return next(err);
+		var profile = info.profile;
 
-			if (!user) {
-				res.send(200, { user: info.profile });
-			} else {
-				res.send(400, { err: 'We found a user linked to your Facebook account.', user: user });
-			}
+		User.findOne({ 'profile.id': profile.id }, function(err, user) {
+			if (err) return next(err);
+			if (user) return res.send(400, { err: 'We found a user linked to your Facebook account.', user: user });
+
+			var username = profile.provider + profile.id;
+
+			signUpSocial(req, res, username, profile);
 		});
 	})(req, res, next);
 };

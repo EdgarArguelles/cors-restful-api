@@ -23,10 +23,6 @@ app.configure(function () {
 	// Setup mongoose
 	app.set('mongodb_uri', process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/corsnection');
 	app.db = mongoose.connect(app.get('mongodb_uri'));
-	// app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
-	// app.db.once('open', function () {
-	// 	console.log('mongoose open for business');
-	// });
 
 	app.set('port', process.env.PORT || 3000);
 

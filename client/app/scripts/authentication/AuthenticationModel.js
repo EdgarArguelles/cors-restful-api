@@ -3,14 +3,14 @@
 app.factory('AuthenticationModel', function ($http, $cookieStore) {
 
 	this.user = $cookieStore.get('user');
-	this.errorStatus = null;
+	this.errorMessage = null;
 
 	this.isSignedIn = function() {
 		return !!this.user;
 	};
 
 	this.setUser = function(user) {
-		this.errorStatus = null;
+		this.errorMessage = null;
 		this.user = user;
 		$cookieStore.put('user', user);
 	};

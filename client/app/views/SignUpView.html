@@ -1,6 +1,12 @@
 <div class="container">
-	<form class="form-horizontal" ng-submit="signUp(username, password, name, email)" ng-init="clear()">
 
+	<div ng-show="AuthenticationModel.errorMessage" class="alert alert-error">
+		{{AuthenticationModel.errorMessage}}
+	</div>
+
+	<form class="form-horizontal" ng-submit="signUp(username, password, name, email)">
+		<legend>Sign up</legend>
+	
 		<div class="control-group">
 			<label class="control-label" for="inputName">Name</label>
 			<div class="controls">
@@ -24,21 +30,13 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<button type="submit" class="btn btn-success">Sign up</button>
+				<button type="submit" class="btn btn-primary">Sign up</button>
 			</div>
 		</div>  
-
-		<div class="control-group">
-			<div class="controls">
-				<div ng-if="AuthenticationModel.errorStatus" ng-switch="AuthenticationModel.errorStatus" class="alert alert-error">
-					<span ng-switch-when="400">User or email address already taken.</span>
-				</div>
-			</div>
-		</div>
 	</form>
 
 	<div class="well">
-		<h3>Or sign up with...</h3>
-		<button class="btn btn-primary" ng-click="facebookRequestToken()">Facebook</button>
+		<legend>Or sign up with...</legend>
+		<button class="btn btn-info" ng-click="signUpFacebookRequestToken()"><i class="icon-facebook-sign"></i> Facebook</button>
 	</div>
 </div>

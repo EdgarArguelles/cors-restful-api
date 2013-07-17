@@ -1,6 +1,6 @@
 exports.get = function (req, res) {
 
-	var models = req.app.db.base.models,
+	var models = req.app.db.models,
 		User = models.User;
 
 	User.find({}, function (err, doc){

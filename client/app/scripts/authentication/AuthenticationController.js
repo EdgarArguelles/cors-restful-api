@@ -14,10 +14,10 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 			password: password
 		}).success(function(data) {
 			AuthenticationModel.setUser(data.user);
-			$location.path(DefaultRoute);
-		}).error(function (data, status) {
+			$location.path('/private');
+		}).error(function (data) {
 			AuthenticationModel.removeUser();
-			AuthenticationModel.errorStatus = status;
+			AuthenticationModel.errorMessage = data;
 		});
 	};
 
@@ -30,40 +30,56 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 		}).success(function(data) {
 			AuthenticationModel.setUser(data.user);
 			$location.path('/private');
-		}).error(function (data, status) {
+		}).error(function (data) {
 			AuthenticationModel.removeUser();
-			AuthenticationModel.errorStatus = status;
+			AuthenticationModel.errorMessage = data;
 		});
 	};
 
-	$scope.facebookRequestToken = function () {
+	$scope.signUpFacebookRequestToken = function () {
 		return $http.get('http://localhost:3000/api/auth/signup/facebook')
 			.success(function(url) {
 				$window.location.href = url;
 			});
 	};
 
-	$scope.facebookSignUp = function () {
+	$scope.signUpFacebook = function () {
 		return $http.get('http://localhost:3000/api/auth/signup/facebook/callback', {
 				params: $location.search()
-			}).success(angular.bind(this, function(data) {
-				console.log('DATA!!!!', data.user);
+			}).success(function(data) {
 				AuthenticationModel.setUser(data.user);
 				$location.search('code', null); // Remove token from Url.
 				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
 				$location.path('/private'); // Redirect to the private page.
-			})).error(function() {
-				$location.search('code', null);
-				$location.path('/signup')
+			}).error(function(data) {
+				AuthenticationModel.errorMessage = data;
+				$location.search('code', null); // Remove token from Url.
+				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
+				$location.path('/signup');
 			});
 	};
 
-	$scope.clear = function () {
-		// Development placeholders.
-		$scope.username = 'pablodenadai';
-		$scope.password = '123';
-		$scope.name = 'Pablo De Nadai';
-		AuthenticationModel.errorStatus = null;
+	$scope.signInFacebookRequestToken = function () {
+		return $http.get('http://localhost:3000/api/auth/signin/facebook')
+			.success(function(url) {
+				$window.location.href = url;
+			});
+	};
+
+	$scope.signInFacebook = function () {
+		return $http.get('http://localhost:3000/api/auth/signin/facebook/callback', {
+				params: $location.search()
+			}).success(function(data) {
+				AuthenticationModel.setUser(data.user);
+				$location.search('code', null); // Remove token from Url.
+				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
+				$location.path('/private'); // Redirect to the private page.
+			}).error(function(data) {
+				AuthenticationModel.errorMessage = data;
+				$location.search('code', null); // Remove token from Url.
+				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
+				$location.path('/signup');
+			});
 	};
 
 });

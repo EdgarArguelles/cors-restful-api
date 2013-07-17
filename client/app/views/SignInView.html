@@ -1,0 +1,31 @@
+<div class="container">
+	<form class="form-horizontal" ng-submit="signIn(username, password)" ng-init="clear()">
+		<div class="control-group">
+			<label class="control-label" for="inputUsername">Username</label>
+			<div class="controls">
+				<input type="text" id="inputUsername" placeholder="Username" ng-model="username">
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="inputPassword">Password</label>
+			<div class="controls">
+				<input type="password" id="inputPassword" placeholder="Password" ng-model="password">
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn btn-success">Sign in</button>
+			</div>
+		</div>  
+
+		<div class="control-group">
+			<div class="controls">
+				<div ng-if="AuthenticationModel.errorStatus" ng-switch="AuthenticationModel.errorStatus" class="alert alert-error">
+					<span ng-switch-when="400">Incorrect username or password.</span>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+	<form class="form-horizontal" ng-submit="signUp(username, password, name, email)" ng-init="clear()">
+
+		<div class="control-group">
+			<label class="control-label" for="inputName">Name</label>
+			<div class="controls">
+				<input type="text" id="inputName" placeholder="Name" ng-model="name" required>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="inputUsername">Username</label>
+			<div class="controls">
+				<input type="text" id="inputUsername" placeholder="Username" ng-model="username" required>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="inputPassword">Password</label>
+			<div class="controls">
+				<input type="password" id="inputPassword" placeholder="Password" ng-model="password" required>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn btn-success">Sign up</button>
+			</div>
+		</div>  
+
+		<div class="control-group">
+			<div class="controls">
+				<div ng-if="AuthenticationModel.errorStatus" ng-switch="AuthenticationModel.errorStatus" class="alert alert-error">
+					<span ng-switch-when="400">User or email address already taken.</span>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="well">
+		<h3>Or sign up with...</h3>
+		<button class="btn btn-primary" ng-click="facebookRequestToken()">Facebook</button>
+	</div>
+</div>

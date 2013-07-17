@@ -1,0 +1,12 @@
+<div ng-if="AuthenticationModel.isSignedIn()" class="navbar">
+  <div class="navbar-inner">
+    <a href="" class="btn btn-danger" ng-click="signOut()">Sign out</a>
+  </div>
+</div>
+
+<div ng-if="!AuthenticationModel.isSignedIn()" class="navbar">
+  <div class="navbar-inner">
+    <a href="/signin" class="btn btn-success">Sign in</a>
+    <a href="/signup" class="btn">Sign up</a>
+  </div>
+</div>

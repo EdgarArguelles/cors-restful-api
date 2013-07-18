@@ -13,7 +13,7 @@ Client: AngularJS, Bootstrap, GruntJS.
 
 Live Demo
 ---------
-[Work in progress]
+[http://corsnection-client.herokuapp.com/](http://corsnection-client.herokuapp.com/) [Work in progress]
 
 - Username: root
 - Password: c0rS

@@ -6,7 +6,7 @@ app.controller('PrivateCtrl', function ($scope,  AuthenticationModel, PrivateMod
 	$scope.PrivateModel = PrivateModel;
 
 	$scope.getUserCollection = function () {
-		PrivateModel.getUserCollection();	
+		PrivateModel.getUserCollection();
 	};
 
 });

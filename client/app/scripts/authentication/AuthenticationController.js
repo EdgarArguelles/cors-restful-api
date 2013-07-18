@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window, AuthenticationModel) {
+app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window, ServerUrl, AuthenticationModel) {
 
 	$scope.username = null;
 	$scope.password = null;
@@ -9,7 +9,7 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 	$scope.AuthenticationModel = AuthenticationModel;
 
 	$scope.signIn = function (username, password) {
-		return $http.post('http://localhost:3000/api/auth/signin', {
+		return $http.post(ServerUrl + '/api/auth/signin', {
 			username: username,
 			password: password
 		}).success(function(data) {
@@ -22,7 +22,7 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 	};
 
 	$scope.signUp = function (username, password, name, email) {
-		return $http.post('http://localhost:3000/api/auth/signup', {
+		return $http.post(ServerUrl + '/api/auth/signup', {
 			username: username,
 			password: password,
 			name: name,
@@ -48,14 +48,14 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 	};
 
 	$scope.signUpFacebookRequestToken = function () {
-		return $http.get('http://localhost:3000/api/auth/signup/facebook')
+		return $http.get(ServerUrl + '/api/auth/signup/facebook')
 			.success(function(url) {
 				$window.location.href = url;
 			});
 	};
 
 	$scope.signUpFacebook = function () {
-		return $http.get('http://localhost:3000/api/auth/signup/facebook/callback', {
+		return $http.get(ServerUrl + '/api/auth/signup/facebook/callback', {
 				params: $location.search()
 			}).success(function(data) {
 				AuthenticationModel.setUser(data.user);
@@ -71,14 +71,14 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 	};
 
 	$scope.signInFacebookRequestToken = function () {
-		return $http.get('http://localhost:3000/api/auth/signin/facebook')
+		return $http.get(ServerUrl + '/api/auth/signin/facebook')
 			.success(function(url) {
 				$window.location.href = url;
 			});
 	};
 
 	$scope.signInFacebook = function () {
-		return $http.get('http://localhost:3000/api/auth/signin/facebook/callback', {
+		return $http.get(ServerUrl + '/api/auth/signin/facebook/callback', {
 				params: $location.search()
 			}).success(function(data) {
 				AuthenticationModel.setUser(data.user);

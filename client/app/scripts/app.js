@@ -2,6 +2,9 @@
 
 var app = angular.module('Corsnection', ['ngCookies']);
 
+// app.constant('ServerUrl', 'http://corsnection-server.herokuapp.com');
+app.constant('ServerUrl', 'http://localhost:3000');
+
 app.config(function ($routeProvider, $httpProvider, $locationProvider) {
 
 	$locationProvider.html5Mode(true);

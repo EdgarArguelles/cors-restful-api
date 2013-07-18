@@ -52,7 +52,7 @@ module.exports = function (grunt) {
 					middleware: function (connect, options) {
 						return [
 							modRewrite([
-							  '!\\.\\w+$ /'
+								'!\\.\\w+$ /'
 							]),
 							lrSnippet,
 							mountFolder(connect, '.tmp'),
@@ -270,7 +270,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', [
 		'clean:dist',
 		'jshint',
-		'test',
+		//'test',
 		'compass:dist',
 		'useminPrepare',
 		'imagemin',

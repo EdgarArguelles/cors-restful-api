@@ -13,6 +13,9 @@ var app = express();
 app.configure(function () {
 	app.disable('x-powered-by');
   	
+	// app.set('client-url', 'http://corsnection-client.herokuapp.com');
+	app.set('client-url', 'http://localhost:9000');
+
 	// Password encryption
 	app.set('crypto_key', 'k3yb0ardc4t');
 

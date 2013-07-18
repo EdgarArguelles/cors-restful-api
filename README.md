@@ -36,8 +36,8 @@ Clone the repository (or download/unzip) into a directory.
 
 Todo
 ----
-- [ ] In-line documentation. (docco)
-- [ ] Unit tests.
+- In-line documentation. (docco)
+- Unit tests.
 
 
 License

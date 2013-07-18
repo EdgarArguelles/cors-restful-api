@@ -22,16 +22,12 @@ app.config(function ($routeProvider, $httpProvider, $locationProvider) {
 			templateUrl: 'views/SignInView.html',
 			controller: 'AuthenticationCtrl'
 		})
-		.when('/signinfacebook', {
-			templateUrl: 'views/SignInFacebookView.html',
-			controller: 'AuthenticationCtrl'
-		})
 		.when('/signup', {
 			templateUrl: 'views/SignUpView.html',
 			controller: 'AuthenticationCtrl'
 		})
-		.when('/signupfacebook', {
-			templateUrl: 'views/SignUpFacebookView.html',
+		.when('/facebook', {
+			templateUrl: 'views/AuthFacebookView.html',
 			controller: 'AuthenticationCtrl'
 		})
 		.otherwise({

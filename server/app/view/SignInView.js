@@ -36,10 +36,18 @@ exports.init = function (req, res) {
 
 // Social
 exports.facebookSignIn = function(req, res, next){
-	var User = req.app.db.models.User,
-		passport = req._passport.instance;
+	var passport = req._passport.instance,
+		origin = req.headers.origin;
 	
-	passport.authenticate('facebook', { callbackURL: 'http://localhost:9000/signinfacebook' }, function(err, user, info) {
+	passport.authenticate('facebook', { callbackURL: origin + '/facebook?action=signin' })(req, res, next);
+};
+
+exports.facebookSignInCallback = function(req, res, next){
+	var User = req.app.db.models.User,
+		passport = req._passport.instance,
+		origin = req.headers.origin;
+	
+	passport.authenticate('facebook', { callbackURL: origin + '/facebook?action=signin' }, function(err, user, info) {
 		if (!info || !info.profile) return res.send(400, 'Profile not available.');
 		
 		var profile = info.profile;

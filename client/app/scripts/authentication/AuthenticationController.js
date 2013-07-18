@@ -36,6 +36,17 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 		});
 	};
 
+	$scope.signFacebook = function () {
+		var search = $location.search(),
+			action = search.action;
+
+		if (action === 'signin') {
+			$scope.signInFacebook();
+		} else if (action === 'signup') {
+			$scope.signUpFacebook();
+		}
+	};
+
 	$scope.signUpFacebookRequestToken = function () {
 		return $http.get('http://localhost:3000/api/auth/signup/facebook')
 			.success(function(url) {

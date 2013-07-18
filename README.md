@@ -1,27 +1,51 @@
 Corsnection
 -----------
+Authenticate users on your webapp using Facebook (or local strategy) over a CORS RESTful service with Node and PassportJS.
 
-AngularJS + NodeJS + CORS + RESTful + PassportJS + FacebookAuth + LocalAuth
+![Example](http://i43.tinypic.com/2u948l0.jpg)
 
-![](http://i43.tinypic.com/2u948l0.jpg)
+Technology
+----------
+Server: NodeJS, CORS, RESTful, PassportJS, FacebookAuth, LocalAuth.
+
+Client: AngularJS, Bootstrap, GruntJS.
+
+
+Live Demo
+---------
+[Work in progress]
+
+- Username: root
+- Password: c0rS
+
 
 Installation
 ------------
+Clone the repository (or download/unzip) into a directory.
 
-Work in progress.
+#### Server
+1. Run `$ npm install`
+2. Configure /app/app.js with Facebook App Key.
+3. Run server via `$ node app/app.js`
 
-Setup
------
+#### Client
+1. Run `$ sudo npm install`
+2. Run `$ sudo bower install`
+3. Run client via `$ grunt server`
 
-Work in progress.
+
+Todo
+----
+- [ ] In-line documentation. (docco)
+- [ ] Unit tests.
+
 
 License
 -------
-
 ```
 The MIT License (MIT)
 
-Copyright (c) 2013 Pablo De Nadai
+Copyright (c) 2013 Pablo De Nadai @pablodenadai
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

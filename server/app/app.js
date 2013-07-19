@@ -4,7 +4,8 @@ var express = require('express'),
 	passport = require('passport'),
 	mongoStore = require('connect-mongo')(express),
 	http = require('http'),
-	path = require('path');
+	path = require('path'),
+	keys = require('./keys.js');
 
 // Instantiate app
 var app = express();
@@ -13,15 +14,18 @@ var app = express();
 app.configure(function () {
 	app.disable('x-powered-by');
   	
+  	// TODO: Env variables?
 	// app.set('client-url', 'http://corsnection-client.herokuapp.com');
 	app.set('client-url', 'http://localhost:9000');
+	app.set('client-facebook-signup-path', '/facebook?action=signup');
+	app.set('client-facebook-signin-path', '/facebook?action=signin');
 
 	// Password encryption
-	app.set('crypto_key', 'k3yb0ardc4t');
+	app.set('crypto-key', 'k3yb0ardc4t');
 
 	// Facebook settings
-	app.set('facebook-oauth-key', '');
-	app.set('facebook-oauth-secret', '');
+	app.set('facebook-oauth-key', keys.facebookOAuthKey);
+	app.set('facebook-oauth-secret', keys.facebookOAuthSecret);
 
 	// Setup mongoose
 	app.set('mongodb_uri', process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/corsnection');

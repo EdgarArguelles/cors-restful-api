@@ -11,7 +11,7 @@ exports = module.exports = function(app, mongoose) {
 	});
 
 	UserSchema.statics.encryptPassword = function(password) {
-		return require('crypto').createHmac('sha512', app.get('crypto_key')).update(password).digest('hex');
+		return require('crypto').createHmac('sha512', app.get('crypto-key')).update(password).digest('hex');
 	};
 
 

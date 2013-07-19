@@ -2,7 +2,7 @@ Corsnection
 -----------
 Authenticate users on your webapp using Facebook (or local strategy) over a CORS RESTful service with Node and PassportJS.
 
-![Example](http://i43.tinypic.com/2u948l0.jpg)
+![Example](http://i39.tinypic.com/2q2j043.png)
 
 Technology
 ----------
@@ -13,7 +13,7 @@ Client: AngularJS, Bootstrap, GruntJS.
 
 Live Demo
 ---------
-[Work in progress]
+[http://corsnection-client.herokuapp.com/](http://corsnection-client.herokuapp.com/)
 
 - Username: root
 - Password: c0rS

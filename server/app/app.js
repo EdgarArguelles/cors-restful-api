@@ -4,8 +4,7 @@ var express = require('express'),
 	passport = require('passport'),
 	mongoStore = require('connect-mongo')(express),
 	http = require('http'),
-	path = require('path'),
-	keys = require('./keys.js');
+	path = require('path');
 
 // Instantiate app
 var app = express();
@@ -24,8 +23,8 @@ app.configure(function () {
 	app.set('crypto-key', 'k3yb0ardc4t');
 
 	// Facebook settings
-	app.set('facebook-oauth-key', keys.facebookOAuthKey);
-	app.set('facebook-oauth-secret', keys.facebookOAuthSecret);
+	app.set('facebook-oauth-key', '');
+	app.set('facebook-oauth-secret', '');
 
 	// Setup mongoose
 	app.set('mongodb_uri', process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/corsnection');

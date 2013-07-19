@@ -1,8 +1,8 @@
 {
-	"name": "client",
+	"name": "corsnection-client-web",
 	"version": "0.0.0",
 	"dependencies": {
-		"express": "*"
+		"express": "3.0.0"
 	},
 	"engines": {
 		"node": ">=0.8.0"

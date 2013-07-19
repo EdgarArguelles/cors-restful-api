@@ -1,6 +1,7 @@
-node_modules
-heroku/dist
+.DS_STORE
 .tmp
 .sass-cache
-.DS_STORE
+
+node_modules
+heroku/dist
 app/components

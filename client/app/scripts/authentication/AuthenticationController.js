@@ -58,15 +58,13 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 		return $http.get(ServerUrl + '/api/auth/signup/facebook/callback', {
 				params: $location.search()
 			}).success(function(data) {
+				$scope.removeUrlParams();
 				AuthenticationModel.setUser(data.user);
-				$location.search('code', null); // Remove token from Url.
-				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
 				$location.path('/private'); // Redirect to the private page.
 			}).error(function(data) {
+				$scope.removeUrlParams();
 				AuthenticationModel.errorMessage = data;
-				$location.search('code', null); // Remove token from Url.
-				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
-				$location.path('/signup');
+				$location.path('/signup'); // Redirect to sign up page.
 			});
 	};
 
@@ -81,16 +79,19 @@ app.controller('AuthenticationCtrl', function ($scope, $http, $location, $window
 		return $http.get(ServerUrl + '/api/auth/signin/facebook/callback', {
 				params: $location.search()
 			}).success(function(data) {
+				$scope.removeUrlParams();
 				AuthenticationModel.setUser(data.user);
-				$location.search('code', null); // Remove token from Url.
-				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
 				$location.path('/private'); // Redirect to the private page.
 			}).error(function(data) {
+				$scope.removeUrlParams();
 				AuthenticationModel.errorMessage = data;
-				$location.search('code', null); // Remove token from Url.
-				$location.hash(null); // Remove Facebook's `#_=_` buggy hash.
-				$location.path('/signup');
+				$location.path('/signin'); // Redirect to the sign in page.
 			});
+	};
+
+	$scope.removeUrlParams = function () {
+		$location.search(null); // Remove params from url.
+		$location.hash(null); // Remove Facebook `#_=_` buggy hash.
 	};
 
 });

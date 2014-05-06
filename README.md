@@ -1,6 +1,7 @@
-Corsnection
+CORSnection
 -----------
-Authenticate users on your webapp using Facebook (or local strategy) over a CORS RESTful service with Node and PassportJS.
+Connect your front-end solution (webapp or/and native mobile app) with a server API that requires authentication.
+Authenticate using Social Stategy (Facebook, Twitter...) or Local Strategy over a CORS RESTful service written in NodeJS.
 
 ![Example](http://i39.tinypic.com/2q2j043.png)
 
